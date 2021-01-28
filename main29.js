@@ -30,7 +30,7 @@ $(":radio[name='streamingPackage']").on("change", function (e) {
 
 $(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("change", function () {
     let defaultPrice = 4000;
-    $(".greytotalpackageprice").html(formPriceString(defaultPrice + getData($(":radio[name='streamingPackage']:checked"), "price") + getData($(":radio[name='eventAppPackageTotal']:checked"), "price")));
+    $total.html(formPriceString(defaultPrice + getSliderPrice($("#rangeSlider")) + getData($(":radio[name='streamingPackage']:checked"), "price") + getData($(":radio[name='eventAppPackageTotal']:checked"), "price")));
 });
 
 $(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () {
@@ -76,27 +76,10 @@ $("#rangeSlider").on("input", function (e) {
     let a = parseInt($(this).val()) / 100,
         t = "linear-gradient(90deg, #1a79ff " + a + "%, rgba(18, 36, 89, 0.1) " + a + "%)";
     $(this).siblings(".sliderValue").val($(this).val()), $(this).css("background", t);
-    let price = 0,
-        pricePerAttendee = 8,
-        value = parseInt($(this).val());
-    if ((value > 500) && (value < 1000)) {
-        pricePerAttendee = 8;
-    } else if ((value >= 1000) && (value < 2000)) {
-        pricePerAttendee = 7;
-    } else if ((value >= 2000) && (value < 5000)) {
-        pricePerAttendee = 6;
-    } else if (value >= 5000) {
-        pricePerAttendee = 5
-    }
-    if (value > 500) {
-        setFlex($(".additionalregcreditscontainer"));
-    } else {
-        hide($(".additionalregcreditscontainer"));
-    }
 
-    price = (value - 500) * pricePerAttendee;
+    let price = getSliderPrice($("#rangeSlider"));
     $("#additionalRegPrice").html(formPriceString(price));
-    $("#additionalCreditsAmount").html(value - 500);
+    $("#additionalCreditsAmount").html(parseInt($(this).val()) - 500);
     sliderVal = price;
     $total.html(formPriceString(4000 + price + getData($eventAppPackageRadios, "price") + getData($streamingPackageRadios, "price")));
 });
@@ -226,4 +209,26 @@ function hide(obj) {
 
 function formPriceString(e) {
     return "$" + e.toLocaleString();
+}
+
+function getSliderPrice(obj) {
+    let price = 0,
+        pricePerAttendee = 8,
+        value = parseInt(obj.val());
+    if ((value > 500) && (value < 1000)) {
+        pricePerAttendee = 8;
+    } else if ((value >= 1000) && (value < 2000)) {
+        pricePerAttendee = 7;
+    } else if ((value >= 2000) && (value < 5000)) {
+        pricePerAttendee = 6;
+    } else if (value >= 5000) {
+        pricePerAttendee = 5
+    }
+    if (value > 500) {
+        setFlex($(".additionalregcreditscontainer"));
+    } else {
+        hide($(".additionalregcreditscontainer"));
+    }
+
+    return value > 500 ? (value - 500) * pricePerAttendee : 0;   
 }
