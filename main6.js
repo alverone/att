@@ -15,6 +15,10 @@ function parseFloatFromString(e) {
     return 1e3 * e.html().replace(/,/, ".").slice(1, e.html().length);
 }
 
+function getPrice(obj) {
+    return parseFloat(obj.data("price"));
+}
+
 function formPriceString(e) {
     return "$" + e.toLocaleString();
 }
@@ -28,7 +32,7 @@ $(":radio[name='eventAppPackage']").on("change", function () {
     parseInt($(this).data("price")) > 0 ?
         ($("#addPackageBtn").removeClass("disabled"), $("#brandedEventsHeading").css("display", "flex"), $("#dataPrice").html(formPriceString(parseInt($(this).data("price"))))) :
         ($("#addPackageBtn").addClass("disabled"), $("#brandedEventsHeading").toggle(!1), $("#dataPrice").html("$0"));
-    let e = 1999 * (parseInt($(".rangeSlider").val()) - 1) + parseInt($eventAppPackageRadios.data("price"));
+    let e = 1999 * (parseInt($(".rangeSlider").val()) - 1) + getPrice($eventAppPackageRadios);
     $("#custom").data("price", e), $("#customExpPackagePrice, #totalPackagePrice").html(formPriceString(e));
 });
 
@@ -36,6 +40,11 @@ $(":radio[name='streamingPackage']").on("change", function (e) {
     "youtube, video or zoom" == $(this).val() ?
         ($("#streamingContainer").toggle(!1), $("#streamingPrice").html("$0")) :
         ($("#streamingContainer").css("display", "flex"), $("#streamingName").html($(":radio[name='streamingPackage']:checked").val()), $("#streamingPrice").html(formPriceString(parseInt($(this).data("price")))), (streamingVal = $(this).data("price")));
+});
+
+$(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("change", function() {
+    let defaultPrice = 4000;
+    $("#greyTotalPackagePrice").html(formPriceString(defaultPrice + getPrice($streamingPackageRadios) + getPrice($(":radio[name='eventAppPackageTotal']:checked"))));
 });
 
 $(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () {
