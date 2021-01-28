@@ -110,17 +110,19 @@ $("#rangeSlider")
                 $("#additionalRegPrice").html(formPriceString(e)),
                 $("#additionalCreditsAmount").html(t - 500),
                 $total.html(formPriceString(4e3 + e + getPrice($eventAppPackageRadios) + getPrice($streamingPackageRadios))));
-            }); $(".rangeSlider").on("input", function (e) {
-            let a = 5.264 * (parseInt($(this).val()) - 1),
-                t = "linear-gradient(90deg, #1a79ff " + a + "%, rgba(18, 36, 89, 0.1) " + a + "%)";
-            $(this).siblings(".sliderValue").val($(this).val()), $(this).css("background", t);
-            let i = 1999 * (parseInt($(this).val()) - 1);
-            if (i <= 0) {
-                if (($("#additionalEvents").toggle(!1), 0 == getPrice($eventAppPackageRadios)))
-                    return $("#addPackageBtn").addClass("disabled"), $("#addPackageBtn").css("pointer-events", "none"), void $("#totalPackagePrice").html("$0");
-            } else parseInt($(this).val()) > 1 && ($("#addPackageBtn").removeClass("disabled"), $("#additionalEvents").css("display", "flex"), $("#addPackageBtn").css("pointer-events", ""), $("#additionalEventsValue").html(i / 1999), $("#additionalEventsPrice").html(formPriceString(i)));
-            let n = i + getPrice($eventAppPackageRadios)); $("#custom").data("price", n), $(".customexppackageprice, #totalPackagePrice, #customPackagePrice").html(formPriceString(n));
     });
+$(".rangeSlider").on("input", function (e) {
+    let a = 5.264 * (parseInt($(this).val()) - 1),
+        t = "linear-gradient(90deg, #1a79ff " + a + "%, rgba(18, 36, 89, 0.1) " + a + "%)";
+    $(this).siblings(".sliderValue").val($(this).val()), $(this).css("background", t);
+    let i = 1999 * (parseInt($(this).val()) - 1);
+    if (i <= 0) {
+        if (($("#additionalEvents").toggle(!1), 0 == getPrice($eventAppPackageRadios)))
+            return $("#addPackageBtn").addClass("disabled"), $("#addPackageBtn").css("pointer-events", "none"), void $("#totalPackagePrice").html("$0");
+    } else parseInt($(this).val()) > 1 && ($("#addPackageBtn").removeClass("disabled"), $("#additionalEvents").css("display", "flex"), $("#addPackageBtn").css("pointer-events", ""), $("#additionalEventsValue").html(i / 1999), $("#additionalEventsPrice").html(formPriceString(i)));
+    let n = i + getPrice($eventAppPackageRadios);
+    $("#custom").data("price", n), $(".customexppackageprice, #totalPackagePrice, #customPackagePrice").html(formPriceString(n));
+});
 $("#rangeSlider")
     .siblings(".sliderValue")
     .on("input", function (e) {
@@ -132,50 +134,53 @@ $("#rangeSlider")
 $(".rangeSlider")
     .siblings(".sliderValue")
     .on("input", function (e) {
-            if (($(this).val(this.value.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1")), parseInt($(this).val()) > 20 && $(this).val(20), "0" === $(this).val()[0])) $(this).val(+$(this).val());
-            else if ("" === $(this).val()) {
-                $(this).siblings("input").val(1);
-                let e = getPrice($eventAppPackageRadios).toLocaleString();
-                return $("#custom").data("price", e), void $("#customExpPackagePrice, #totalPackagePrice, #customPackagePrice").html(formPriceString(e));
-            }
-            if (parseInt($(this).val()) < 2 && getPrice($eventAppPackageRadios) {
-                    $(this).siblings("input").val(1);
-                    let e = getPrice($eventAppPackageRadios).toLocaleString();
-                    return $("#custom").data("price", e), void $("#customExpPackagePrice, #totalPackagePrice, #customPackagePrice").html(formPriceString(e));
-                }
-                $(this).siblings("input").val($(this).val()),
-                $(this)
+        if (($(this).val(this.value.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1")), parseInt($(this).val()) > 20 && $(this).val(20), "0" === $(this).val()[0])) $(this).val(+$(this).val());
+        else if ("" === $(this).val()) {
+            $(this).siblings("input").val(1);
+            let e = getPrice($eventAppPackageRadios).toLocaleString();
+            return $("#custom").data("price", e), void $("#customExpPackagePrice, #totalPackagePrice, #customPackagePrice").html(formPriceString(e));
+        }
+        if (parseInt($(this).val()) < 2 && getPrice($eventAppPackageRadios)) {
+            $(this).siblings("input").val(1);
+            let e = getPrice($eventAppPackageRadios).toLocaleString();
+            return $("#custom").data("price", e), void $("#customExpPackagePrice, #totalPackagePrice, #customPackagePrice").html(formPriceString(e));
+        }
+        $(this).siblings("input").val($(this).val()),
+            $(this)
+            .siblings("input")
+            .css("background", "linear-gradient(90deg, #1a79ff " + 5.264 * (parseInt($(this).val()) - 1) + "%, rgba(18, 36, 89, 0.1) " + 5.264 * (parseInt($(this).val()) - 1) + "%)");
+        let a = 1999 * (parseInt($(this).val()) - 1);
+        if (a <= 0) {
+            if (($("#additionalEvents").toggle(!1), 0 == getPrice($eventAppPackageRadios)))
+                return $("#addPackageBtn").addClass("disabled"), $("#addPackageBtn").css("pointer-events", "none"), void $("#totalPackagePrice").html("$0");
+        } else parseInt($(this).val()) > 1 && ($("#addPackageBtn").removeClass("disabled"), $("#additionalEvents").css("display", "flex"), $("#addPackageBtn").css("pointer-events", ""), $("#additionalEventsValue").html(a / 1999), $("#additionalEventsPrice").html(formPriceString(a)));
+        let t = a + getPrice($eventAppPackageRadios);
+        $("#custom").data("price", t), $("#customExpPackagePrice, #customPackagePrice, #totalPackagePrice").html(formPriceString(t));
+    });
+$(".rangeSlider")
+    .siblings(".sliderValue")
+    .on("focusout", function (e) {
+        if (!$(this).val()) {
+            $(this).val(1);
+            let e = getPrice($eventAppPackageRadios).toLocaleString();
+            $("#custom").data("price", e), $("#customExpPackagePrice, #customPackagePrice, #totalPackagePrice").html(formPriceString(e));
+        }
+    }),
+    $(".customize-modal").on("keydown", ":input:not(textarea):not(:submit)", function (e) {
+        if (13 == e.keyCode) return e.preventDefault(), !1;
+    });
+$(".numericContainer")
+    .children("button")
+    .on("click", function (e) {
+        e.preventDefault();
+        let value = parseInt($(this).siblings("input").val());
+        if (value < 2) {
+            $(this).siblings("input").val(1);
+        } else if (value > 9) {
+            $(this).siblings("input").val(10);
+        } else {
+            $(this)
                 .siblings("input")
-                .css("background", "linear-gradient(90deg, #1a79ff " + 5.264 * (parseInt($(this).val()) - 1) + "%, rgba(18, 36, 89, 0.1) " + 5.264 * (parseInt($(this).val()) - 1) + "%)");
-                let a = 1999 * (parseInt($(this).val()) - 1);
-                if (a <= 0) {
-                    if (($("#additionalEvents").toggle(!1), 0 == getPrice($eventAppPackageRadios)))
-                        return $("#addPackageBtn").addClass("disabled"), $("#addPackageBtn").css("pointer-events", "none"), void $("#totalPackagePrice").html("$0");
-                } else parseInt($(this).val()) > 1 && ($("#addPackageBtn").removeClass("disabled"), $("#additionalEvents").css("display", "flex"), $("#addPackageBtn").css("pointer-events", ""), $("#additionalEventsValue").html(a / 1999), $("#additionalEventsPrice").html(formPriceString(a)));
-                let t = a + getPrice($eventAppPackageRadios); $("#custom").data("price", t), $("#customExpPackagePrice, #customPackagePrice, #totalPackagePrice").html(formPriceString(t));
-            }); $(".rangeSlider")
-        .siblings(".sliderValue")
-        .on("focusout", function (e) {
-            if (!$(this).val()) {
-                $(this).val(1);
-                let e = getPrice($eventAppPackageRadios).toLocaleString();
-                $("#custom").data("price", e), $("#customExpPackagePrice, #customPackagePrice, #totalPackagePrice").html(formPriceString(e));
-            }
-        }),
-        $(".customize-modal").on("keydown", ":input:not(textarea):not(:submit)", function (e) {
-            if (13 == e.keyCode) return e.preventDefault(), !1;
-        }); $(".numericContainer")
-        .children("button")
-        .on("click", function (e) {
-            e.preventDefault();
-            let value = parseInt($(this).siblings("input").val());
-            if (value < 2) {
-                $(this).siblings("input").val(1);
-            } else if (value > 9) {
-                $(this).siblings("input").val(10);
-            } else {
-                $(this)
-                    .siblings("input")
-                    .val(value + $(this).data("increment"));
-            }
-        });
+                .val(value + $(this).data("increment"));
+        }
+    });
