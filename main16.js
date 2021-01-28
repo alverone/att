@@ -18,6 +18,9 @@ function parseFloatFromString(e) {
 function getData(obj, data) {
     return parseInt(obj.data(data));
 }
+function setFlex(obj) {
+    return obj.css("display", "flex")
+}
 
 function formPriceString(e) {
     return "$" + e.toLocaleString();
@@ -30,7 +33,7 @@ $("#addPackageBtn").css("pointer-events", "none"),
 
 $(":radio[name='eventAppPackage']").on("change", function () {
     parseInt($(this).data("price")) > 0 ?
-        ($("#addPackageBtn").removeClass("disabled"), $("#brandedEventsHeading").css("display", "flex"), $("#dataPrice").html(formPriceString(parseInt($(this).data("price"))))) :
+        ($("#addPackageBtn").removeClass("disabled"), setFlex($("#brandedEventsHeading")), $("#dataPrice").html(formPriceString(parseInt($(this).data("price"))))) :
         ($("#addPackageBtn").addClass("disabled"), $("#brandedEventsHeading").toggle(!1), $("#dataPrice").html("$0"));
     let e = 1999 * (parseInt($(".rangeSlider").val()) - 1) + getData($eventAppPackageRadios);
     $("#custom").data("price", e), $("#customExpPackagePrice, #totalPackagePrice").html(formPriceString(e));
@@ -39,7 +42,7 @@ $(":radio[name='eventAppPackage']").on("change", function () {
 $(":radio[name='streamingPackage']").on("change", function (e) {
     "youtube, video or zoom" == $(this).val() ?
         ($(".streamingcontainer").toggle(!1), $("#streamingPrice").html("$0")) :
-        ($(".streamingcontainer").css("display", "flex"), $(".streamingname").html($(":radio[name='streamingPackage']:checked").val()), $(".streamingprice").html(formPriceString(getData($(this), "price")))), (streamingVal = $(this).data("price"));
+        (setFlex($(".streamingcontainer")), $(".streamingname").html($(":radio[name='streamingPackage']:checked").val()), $(".streamingprice").html(formPriceString(getData($(this), "price")))), (streamingVal = $(this).data("price"));
 });
 
 $(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("change", function () {
@@ -51,18 +54,18 @@ $(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () 
     if ($("#customBuyStreaming").is(":visible")) {
         $("#ownStreaming").toggle(false);
     } else {
-        $("#ownStreaming").toggle(true);
+        setFlex($("#ownStreaming"));
     }
 
     if ($("#brandedAppChoice").is(":visible")) {
         $("#attendifyAppChoice").toggle(false);
     } else {
-        $("#attendifyAppChoice").toggle(true);
+        setFlex($("#attendifyAppChoice"));
     }
 });
 $(":radio[name='eventAppPackageTotal']").on("change", function () {
-    $("#custom").prop("checked") ? $(".customexpcontainer").css("display", "flex") : $(".customexpcontainer").toggle(!1),
-        $("#brandedTotal").prop("checked") ? $(".brandedappcontainer").css("display", "flex") : $(".brandedappcontainer").toggle(!1);
+    $("#custom").prop("checked") ? setFlex($(".customexpcontainer")) : $(".customexpcontainer").toggle(!1),
+        $("#brandedTotal").prop("checked") ? setFlex($(".brandedappcontainer")) : $(".brandedappcontainer").toggle(!1);
 });
 
 $("#addPackageBtn").on("click", function (e) {
@@ -72,7 +75,7 @@ $("#addPackageBtn").on("click", function (e) {
         }, 400, function () {
             $(".customize-modal").css("display", "none");
         }),
-        $("#customizeOption").css("display", "flex"),
+        setFlex($("#customizeOption")),
         $("#customizeOptionUpper").removeClass("bottom");
 });
 
@@ -86,7 +89,7 @@ $("#rangeSlider").on("input", function (e) {
         r = parseInt($(this).val());
     r <= 500 ?
         $(".additionalregcreditscontainer").toggle(!1) :
-        (r > 500 && $(".additionalregcreditscontainer").css("display", "flex"),
+        (r > 500 && setFlex($(".additionalregcreditscontainer")),
             r > 500 && r < 1e3 ? (n = 8) : r >= 1e3 && r < 2e3 ? (n = 7) : r >= 2e3 && r < 5e3 ? (n = 6) : r >= 5e3 && (n = 5),
             (i = (r - 500) * n),
             $("#additionalRegPrice").html(formPriceString(i)),
@@ -104,7 +107,7 @@ $("#rangeSlider")
             t = parseInt($(this).val());
         t <= 500 ?
             $(".additionalregcreditscontainer").toggle(!1) :
-            (t > 500 && $(".additionalregcreditscontainer").css("display", "flex"),
+            (t > 500 && setFlex($(".additionalregcreditscontainer")),
                 t > 500 && t < 1e3 ? (a = 8) : t >= 1e3 && t < 2e3 ? (a = 7) : t >= 2e3 && t < 5e3 ? (a = 6) : t >= 5e3 && (a = 5),
                 (sliderVal = e = (t - 500) * a),
                 $("#additionalRegPrice").html(formPriceString(e)),
@@ -119,7 +122,7 @@ $(".rangeSlider").on("input", function (e) {
     if (i <= 0) {
         if (($("#additionalEvents").toggle(!1), 0 == getData($eventAppPackageRadios, "price")))
             return $("#addPackageBtn").addClass("disabled"), $("#addPackageBtn").css("pointer-events", "none"), void $("#totalPackagePrice").html("$0");
-    } else parseInt($(this).val()) > 1 && ($("#addPackageBtn").removeClass("disabled"), $("#additionalEvents").css("display", "flex"), $("#addPackageBtn").css("pointer-events", ""), $("#additionalEventsValue").html(i / 1999), $("#additionalEventsPrice").html(formPriceString(i)));
+    } else parseInt($(this).val()) > 1 && ($("#addPackageBtn").removeClass("disabled"), setFlex($("#additionalEvents")), $("#addPackageBtn").css("pointer-events", ""), $("#additionalEventsValue").html(i / 1999), $("#additionalEventsPrice").html(formPriceString(i)));
     let n = i + getData($eventAppPackageRadios, "price");
     $("#custom").data("price", n), $(".customexppackageprice, #totalPackagePrice, #customPackagePrice").html(formPriceString(n));
 });
@@ -153,7 +156,7 @@ $(".rangeSlider")
         if (a <= 0) {
             if (($("#additionalEvents").toggle(!1), 0 == getData($eventAppPackageRadios, "price")))
                 return $("#addPackageBtn").addClass("disabled"), $("#addPackageBtn").css("pointer-events", "none"), void $("#totalPackagePrice").html("$0");
-        } else parseInt($(this).val()) > 1 && ($("#addPackageBtn").removeClass("disabled"), $("#additionalEvents").css("display", "flex"), $("#addPackageBtn").css("pointer-events", ""), $("#additionalEventsValue").html(a / 1999), $("#additionalEventsPrice").html(formPriceString(a)));
+        } else parseInt($(this).val()) > 1 && ($("#addPackageBtn").removeClass("disabled"), setFlex($("#additionalEvents")), $("#addPackageBtn").css("pointer-events", ""), $("#additionalEventsValue").html(a / 1999), $("#additionalEventsPrice").html(formPriceString(a)));
         let t = a + getData($eventAppPackageRadios, "price");
         $("#custom").data("price", t), $("#customExpPackagePrice, #customPackagePrice, #totalPackagePrice").html(formPriceString(t));
     });
