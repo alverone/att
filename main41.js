@@ -72,10 +72,9 @@ $("#addPackageBtn").on("click", function (e) {
         $("#customizeOptionUpper").removeClass("bottom");
     $(":radio[name='eventAppPackageTotal']:checked").siblings("div").removeClass("w--redirected-checked");
     $("#custom").prop("checked", true);
-    $("#custom").siblings("div").addClass
-    ("w--redirected-checked");
+    $("#custom").siblings("div").addClass("w--redirected-checked");
     setFlex($(".customexpcontainer"));
-    $total.html(formPriceString(4000 + price + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price")));
+    $total.html(formPriceString(4000 + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price")));
 });
 
 
