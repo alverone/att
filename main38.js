@@ -70,6 +70,9 @@ $("#addPackageBtn").on("click", function (e) {
         }),
         setFlex($("#customizeOption")),
         $("#customizeOptionUpper").removeClass("bottom");
+    $(":radio[name='eventAppPackageTotal']:checked").siblings("div").removeClass("w--redirected-checked");
+    $("#custom").prop("checked", true);
+    $("#custom").siblings("div").addClass("w--redirected-checked");
 });
 
 
