@@ -19,7 +19,7 @@ $(":radio[name='eventAppPackage']").on("change", function () {
     parseInt($(this).data("price")) > 0 ?
         ($("#addPackageBtn").removeClass("disabled"), setFlex($("#brandedEventsHeading")), $("#dataPrice").html(formPriceString(getData($(this), "price")))) :
         ($("#addPackageBtn").addClass("disabled"), hide($("#brandedEventsHeading")), $("#dataPrice").html("$0"));
-    let e = 1999 * (getValue($(".rangeSlider")) - 1) + getData($eventAppPackageRadios, "price");
+    let e = 1999 * (getValue($(".rangeSlider")) - 1) + getData($(":radio[name='eventAppPackage']:checked"), "price");
     $("#custom").data("price", e), $(".customexppackageprice, #totalPackagePrice").html(formPriceString(e));
 });
 
