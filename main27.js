@@ -22,8 +22,6 @@ $(":radio[name='eventAppPackage']").on("change", function () {
     $("#custom").data("price", e), $("#customExpPackagePrice, #totalPackagePrice").html(formPriceString(e));
 });
 
-
-//hide $(".streamingcontainer") if youtube is chosen
 $(":radio[name='streamingPackage']").on("change", function (e) {
     "youtube, vimeo or zoom" == $(this).val() ?
         (hide($(".streamingcontainer")), $("#streamingPrice").html("$0")) :
@@ -34,7 +32,6 @@ $(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("ch
     let defaultPrice = 4000;
     $(".greytotalpackageprice").html(formPriceString(defaultPrice + getData($(":radio[name='streamingPackage']:checked"), "price") + getData($(":radio[name='eventAppPackageTotal']:checked"), "price")));
 });
-
 
 $(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () {
     $("#engagementPriceTotal").html($("#engagementPrice").html());
@@ -92,7 +89,7 @@ $("#rangeSlider").on("input", function (e) {
         pricePerAttendee = 5           
     }
     if (value > 500) {
-        setFlex($(".additionalregcreditscontainer");   
+        setFlex($(".additionalregcreditscontainer"));   
     } else {
         hide($(".additionalregcreditscontainer"));            
     }
