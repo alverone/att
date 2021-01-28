@@ -38,7 +38,7 @@ $(":radio[name='streamingPackage']").on("change", function (e) {
         ($("#streamingContainer").css("display", "flex"), $("#streamingName").html($(":radio[name='streamingPackage']:checked").val()), $("#streamingPrice").html(formPriceString(parseInt($(this).data("price")))), (streamingVal = $(this).data("price")));
 });
 
-$(":radio[name='eventApp']").on("change", function () {
+$(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () {
     if ($("#customBuyStreaming").is(":visible")) {
         $("#ownStreaming").toggle(false);
     } else {
@@ -165,9 +165,9 @@ $(".numericContainer")
     .on("click", function (e) {
         e.preventDefault();
         let value = parseInt($(this).siblings("input").val());
-        if (value < 1) {
+        if (value < 2) {
             $(this).siblings("input").val(1);
-        } else if (value > 10) {
+        } else if (value > 9) {
             $(this).siblings("input").val(10);
         } else {
             $(this)
