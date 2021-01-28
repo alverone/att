@@ -24,7 +24,7 @@ function setFlex(obj) {
 }
 
 function hide(obj) {
-    return obj.toggle(false);   
+    return obj.toggle(false);
 }
 
 function formPriceString(e) {
@@ -56,14 +56,27 @@ $(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("ch
     $(".greytotalpackageprice").html(formPriceString(defaultPrice + getData($(":radio[name='streamingPackage']:checked"), "price") + getData($(":radio[name='eventAppPackageTotal']:checked"), "price")));
 });
 
-$(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () {
-    $("#customBuyStreaming").is(":visible") ? hide($("#ownStreaming")) : setFlex($("#ownStreaming"));
 
-    if ($("#brandedAppChoice").is(":visible")) {
-        $("#attendifyAppChoice").toggle(false);
+$(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () {
+
+    $("#engagementPriceTotal").html($("#engagementPrice").html());
+    if (getData($(":radio[name='eventApp']:checked"), "price") > 0) {
+        hide($("#attendifyAppChoice"))
+        setFlex($("#brandedAppChoice"));
     } else {
+        hide($("#brandedAppChoice"));
         setFlex($("#attendifyAppChoice"));
     }
+    if (getData($(":radio[name='streaming']:checked")) > 0) {
+        setFlex($("#customBuyStreaming"));
+        hide($("#ownStreaming"))
+        $("#customBuyStreaming").children(".heading-5").last().html(formPriceString(getData($(":radio[name='streaming']:checked"), "price")));
+        $("#customBuyStreaming").children(".heading-5").first().html($(":radio[name='streaming']:checked").siblings("span").html());
+    } else {
+        hide($("#customBuyStreaming"));
+        setFlex($("#ownStreaming"));
+    }
+
 });
 $(":radio[name='eventAppPackageTotal']").on("change", function () {
     $("#custom").prop("checked") ? setFlex($(".customexpcontainer")) : hide($(".customexpcontainer")),
@@ -176,6 +189,8 @@ $(".rangeSlider")
     });
 
 $(".credits").on("click", function () {
+    hide($(this));
+    $(".number-of-credits-container").toggle(true);
     let currentValue = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
     $("#engagementPriceTotal").html(formPriceString(2 * currentValue));
 });
