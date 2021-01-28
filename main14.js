@@ -180,9 +180,10 @@ $(".numericContainer")
     .on("click", function (e) {
         e.preventDefault();
         let value = parseInt($(this).siblings("input").val());
-        if ((value = 1) && (getData($(this), "increment") == -1)) {
+        let btnAction = getData($(this), "increment");
+        if ((value === 1) && (btnAction === -1)) {
             $(this).siblings("input").val(1);
-        } else if ((value = 10) && (getData($(this), "increment") == 1)) {
+        } else if ((value === 10) && (btnAction === 1)) {
             $(this).siblings("input").val(10);
         } else {
             $(this)
