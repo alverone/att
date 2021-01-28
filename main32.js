@@ -88,6 +88,10 @@ $("#rangeSlider")
     .siblings("input")
     .on("input", function () {
         $(this).val(this.value.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1")), parseInt($(this).val()) > 1e4 ? $(this).val(1e4) : "" === $(this).val() && $(this).val(0), "0" === $(this).val()[0] && $(this).val(+$(this).val());
+    
+        $(this).siblings("input").val($(this).val());
+        $(this).siblings("input").css("background", handleGradient(parseInt($(this).val())));
+        
         let price = getSliderPrice($("#rangeSlider"));
         $(".additionalregprice").html(formPriceString(price));
         $(".additionalcreditsamount").html(parseInt($(this).val()) - 500);
@@ -106,14 +110,6 @@ $(".rangeSlider").on("input", function (e) {
     let n = i + getData($eventAppPackageRadios, "price");
     $("#custom").data("price", n), $(".customexppackageprice, #totalPackagePrice, #customPackagePrice").html(formPriceString(n));
 });
-$("#rangeSlider")
-    .siblings(".sliderValue")
-    .on("input", function (e) {
-        $(this).siblings("input").val($(this).val()),
-            $(this)
-            .siblings("input")
-            .css("background", handleGradient(parseInt($(this).val())));
-    });
 $(".rangeSlider")
     .siblings(".sliderValue")
     .on("input", function (e) {
