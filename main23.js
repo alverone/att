@@ -36,7 +36,7 @@ $(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("ch
 
 $(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () {
     $("#engagementPriceTotal").html($("#engagementPrice").html());
-    
+
     if (getData($(":radio[name='eventApp']:checked"), "price") > 0) {
         hide($("#attendifyAppChoice"));
         setFlex($("#brandedAppChoice"));
@@ -44,7 +44,7 @@ $(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () 
         hide($("#brandedAppChoice"));
         setFlex($("#attendifyAppChoice"));
     }
-    
+
     if (getData($(":radio[name='streaming']:checked"), "price") > 0) {
         setFlex($("#customBuyStreaming"));
         hide($("#ownStreaming"));
@@ -186,10 +186,10 @@ $(".numericContainer")
         } else {
             $(this)
                 .siblings("input")
-                .val(value + btnAction;
+                .val(value + btnAction);
         }
     });
-$("#numberOfCredits").on("change", function() {
+$("#numberOfCredits").on("change", function () {
     let value = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
     return $("#engagementPriceTotal").html(formPriceString(parseInt($(this).val()) * value));
 });
