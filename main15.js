@@ -172,7 +172,7 @@ $(".rangeSlider")
 
 $(".credits").on("click", function () {
     let currentValue = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
-    $("#engagementPriceTotal").html(formPriceString(parseFloat($(this).val() * currentValue)));
+    $("#engagementPriceTotal").html(formPriceString(2 * currentValue));
 });
 
 $(".numericContainer")
