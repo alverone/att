@@ -22,8 +22,10 @@ $(":radio[name='eventAppPackage']").on("change", function () {
     $("#custom").data("price", e), $("#customExpPackagePrice, #totalPackagePrice").html(formPriceString(e));
 });
 
+
+//hide $(".streamingcontainer") if youtube is chosen
 $(":radio[name='streamingPackage']").on("change", function (e) {
-    "youtube, video or zoom" == $(this).val() ?
+    "youtube, vimeo or zoom" == $(this).val() ?
         (hide($(".streamingcontainer")), $("#streamingPrice").html("$0")) :
         (setFlex($(".streamingcontainer")), $(".streamingname").html($(":radio[name='streamingPackage']:checked").val()), $(".streamingprice").html(formPriceString(getData($(this), "price")))), (streamingVal = $(this).data("price"));
 });
@@ -177,6 +179,7 @@ $(".numericContainer")
     .children("button")
     .on("click", function (e) {
         e.preventDefault();
+        let price = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
         let value = parseInt($(this).siblings("input").val());
         let btnAction = getData($(this), "increment");
         if ((value === 1) && (btnAction === -1)) {
@@ -188,11 +191,9 @@ $(".numericContainer")
                 .siblings("input")
                 .val(value + btnAction);
         }
+    $("#engagementPriceTotal").html(formPriceString(price * $(this).siblings("input").val()));
     });
-$("#numberOfCredits").on("change", function () {
-    let value = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
-    $("#engagementPriceTotal").html(formPriceString(parseInt($(this).val()) * value));
-});
+
 
 //additional functions
 function handleGradient(e) {
