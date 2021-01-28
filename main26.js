@@ -79,18 +79,29 @@ $("#rangeSlider").on("input", function (e) {
     let a = parseInt($(this).val()) / 100,
         t = "linear-gradient(90deg, #1a79ff " + a + "%, rgba(18, 36, 89, 0.1) " + a + "%)";
     $(this).siblings(".sliderValue").val($(this).val()), $(this).css("background", t);
-    let i,
-        n,
-        r = parseInt($(this).val());
-    r <= 500 ?
-        hide($(".additionalregcreditscontainer")) :
-        (r > 500 && setFlex($(".additionalregcreditscontainer")),
-            r > 500 && r < 1e3 ? (n = 8) : r >= 1e3 && r < 2e3 ? (n = 7) : r >= 2e3 && r < 5e3 ? (n = 6) : r >= 5e3 && (n = 5),
-            (i = (r - 500) * n),
-            $("#additionalRegPrice").html(formPriceString(i)),
-            $("#additionalCreditsAmount").html(r - 500),
-            (sliderVal = i),
-            $total.html(formPriceString(4e3 + i + getData($eventAppPackageRadios, "price") + getData($streamingPackageRadios, "price"))));
+    let price = 0,
+        pricePerAttendee = 8,
+        value = parseInt($(this).val());
+    if ((value > 500) && (value < 1000)) {
+        pricePerAttendee = 8;
+    } else if ((value >= 1000) && (value < 2000)) {
+         pricePerAttendee = 7;   
+    } else if ((value >= 2000) && (value < 5000)) {
+        pricePerAttendee = 6;   
+    } else if (value >= 5000) {
+        pricePerAttendee = 5           
+    }
+    if (value > 500) {
+        setFlex($(".additionalregcreditscontainer");   
+    } else {
+        hide($(".additionalregcreditscontainer"));            
+    }
+
+    price = (value - 500) * pricePerAttendee;
+    $("#additionalRegPrice").html(formPriceString(price));
+    $("#additionalCreditsAmount").html(value - 500);
+    sliderVal = price;
+    $total.html(formPriceString(4000 + price + getData($eventAppPackageRadios, "price") + getData($streamingPackageRadios, "price"))));
 });
 
 $("#rangeSlider")
