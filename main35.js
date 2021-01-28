@@ -11,13 +11,13 @@ let $eventAppPackageRadios = $(":radio[name='eventAppPackage']:checked"),
 $("#addPackageBtn").css("pointer-events", "none");
 
 $(":radio[name='streaming'], :radio[name='eventApp'], #numberOfCredits").on("change", function (e) {
-    let a = getData($(":radio[name='streaming']:checked"), "price") + 1999 + getData($(":radio[name='eventApp']:checked"), "price"));
+    let a = getData($(":radio[name='streaming']:checked"), "price") + 1999 + getData($(":radio[name='eventApp']:checked"), "price");
     $("#engagementPrice").html(formPriceString(a)), $("#engagementPriceTotal").html(formPriceString(a * getValue($("#numberOfCredits"))));
 });
 
 $(":radio[name='eventAppPackage']").on("change", function () {
     parseInt($(this).data("price")) > 0 ?
-        ($("#addPackageBtn").removeClass("disabled"), setFlex($("#brandedEventsHeading")), $("#dataPrice").html(formPriceString(getData($(this), "price"))))) :
+        ($("#addPackageBtn").removeClass("disabled"), setFlex($("#brandedEventsHeading")), $("#dataPrice").html(formPriceString(getData($(this), "price")))) :
         ($("#addPackageBtn").addClass("disabled"), hide($("#brandedEventsHeading")), $("#dataPrice").html("$0"));
     let e = 1999 * (getValue($(".rangeSlider")) - 1) + getData($eventAppPackageRadios);
     $("#custom").data("price", e), $("#customExpPackagePrice, #totalPackagePrice").html(formPriceString(e));
@@ -89,13 +89,13 @@ $("#rangeSlider")
     .siblings("input")
     .on("input", function () {
         $(this).val(this.value.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1")), getValue($(this)) > 1e4 ? $(this).val(1e4) : "" === $(this).val() && $(this).val(0), "0" === $(this).val()[0] && $(this).val(+$(this).val());
-        
+
         let value = getValue($(this)),
             pricePerAttendee = 8;
-    
+
         $(this).siblings("input").val($(this).val());
         $(this).siblings("input").css("background", handleGradient(value));
-    
+
         if ((value >= 1000) && (value < 2000)) {
             pricePerAttendee = 7;
         } else if ((value >= 2000) && (value < 5000)) {
@@ -222,7 +222,7 @@ function getSliderPrice(obj) {
     let price = 0,
         pricePerAttendee = 8,
         value = getValue(obj);
-    
+
     if ((value >= 1000) && (value < 2000)) {
         pricePerAttendee = 7;
     } else if ((value >= 2000) && (value < 5000)) {
@@ -236,9 +236,9 @@ function getSliderPrice(obj) {
         hide($(".additionalregcreditscontainer"));
     }
 
-    return value > 500 ? (value - 500) * pricePerAttendee : 0;   
+    return value > 500 ? (value - 500) * pricePerAttendee : 0;
 }
 
 function getValue(obj) {
-    return parseInt(obj.val());   
+    return parseInt(obj.val());
 }
