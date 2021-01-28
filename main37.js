@@ -82,7 +82,7 @@ $("#rangeSlider").on("input", function (e) {
     $(".additionalregprice").html(formPriceString(price));
     $(".additionalcreditsamount").html(parseInt($(this).val()) - 500);
     sliderVal = price;
-    $total.html(formPriceString(4000 + price + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($streamingPackageRadios, "price")));
+    $total.html(formPriceString(4000 + price + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price")));
 });
 
 $("#rangeSlider")
@@ -112,7 +112,7 @@ $("#rangeSlider")
         $(".additionalregprice").html(formPriceString(price));
         $(".additionalcreditsamount").html(value - 500);
         sliderVal = price;
-        $total.html(formPriceString(4000 + price + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($streamingPackageRadios, "price")));
+        $total.html(formPriceString(4000 + price + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price")));
     });
 
 $(".rangeSlider").on("input", function (e) {
