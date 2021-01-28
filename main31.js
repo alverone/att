@@ -88,17 +88,11 @@ $("#rangeSlider")
     .siblings("input")
     .on("input", function () {
         $(this).val(this.value.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1")), parseInt($(this).val()) > 1e4 ? $(this).val(1e4) : "" === $(this).val() && $(this).val(0), "0" === $(this).val()[0] && $(this).val(+$(this).val());
-        let e,
-            a,
-            t = parseInt($(this).val());
-        t <= 500 ?
-            hide($(".additionalregcreditscontainer")) :
-            (t > 500 && setFlex($(".additionalregcreditscontainer")),
-                t > 500 && t < 1e3 ? (a = 8) : t >= 1e3 && t < 2e3 ? (a = 7) : t >= 2e3 && t < 5e3 ? (a = 6) : t >= 5e3 && (a = 5),
-                (sliderVal = e = (t - 500) * a),
-                $("#additionalRegPrice").html(formPriceString(e)),
-                $("#additionalCreditsAmount").html(t - 500),
-                $total.html(formPriceString(4e3 + e + getData($eventAppPackageRadios, "price") + getData($streamingPackageRadios, "price"))));
+        let price = getSliderPrice($("#rangeSlider"));
+        $(".additionalregprice").html(formPriceString(price));
+        $(".additionalcreditsamount").html(parseInt($(this).val()) - 500);
+        sliderVal = price;
+        $total.html(formPriceString(4000 + price + getData($eventAppPackageRadios, "price") + getData($streamingPackageRadios, "price")));
     });
 $(".rangeSlider").on("input", function (e) {
     let a = 5.264 * (parseInt($(this).val()) - 1),
