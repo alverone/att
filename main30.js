@@ -78,8 +78,8 @@ $("#rangeSlider").on("input", function (e) {
     $(this).siblings(".sliderValue").val($(this).val()), $(this).css("background", t);
 
     let price = getSliderPrice($("#rangeSlider"));
-    $("#additionalRegPrice").html(formPriceString(price));
-    $("#additionalCreditsAmount").html(parseInt($(this).val()) - 500);
+    $(".additionalregprice").html(formPriceString(price));
+    $(".additionalcreditsamount").html(parseInt($(this).val()) - 500);
     sliderVal = price;
     $total.html(formPriceString(4000 + price + getData($eventAppPackageRadios, "price") + getData($streamingPackageRadios, "price")));
 });
