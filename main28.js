@@ -82,23 +82,23 @@ $("#rangeSlider").on("input", function (e) {
     if ((value > 500) && (value < 1000)) {
         pricePerAttendee = 8;
     } else if ((value >= 1000) && (value < 2000)) {
-         pricePerAttendee = 7;   
+        pricePerAttendee = 7;
     } else if ((value >= 2000) && (value < 5000)) {
-        pricePerAttendee = 6;   
+        pricePerAttendee = 6;
     } else if (value >= 5000) {
-        pricePerAttendee = 5           
+        pricePerAttendee = 5
     }
     if (value > 500) {
-        setFlex($(".additionalregcreditscontainer"));   
+        setFlex($(".additionalregcreditscontainer"));
     } else {
-        hide($(".additionalregcreditscontainer"));            
+        hide($(".additionalregcreditscontainer"));
     }
 
     price = (value - 500) * pricePerAttendee;
     $("#additionalRegPrice").html(formPriceString(price));
     $("#additionalCreditsAmount").html(value - 500);
     sliderVal = price;
-    $total.html(formPriceString(4000 + price + getData($eventAppPackageRadios, "price") + getData($streamingPackageRadios, "price"))));
+    $total.html(formPriceString(4000 + price + getData($eventAppPackageRadios, "price") + getData($streamingPackageRadios, "price")));
 });
 
 $("#rangeSlider")
@@ -199,7 +199,7 @@ $(".numericContainer")
                 .siblings("input")
                 .val(value + btnAction);
         }
-    $("#engagementPriceTotal").html(formPriceString(price * $(this).siblings("input").val()));
+        $("#engagementPriceTotal").html(formPriceString(price * $(this).siblings("input").val()));
     });
 
 
