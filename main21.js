@@ -7,29 +7,6 @@ let $eventAppPackageRadios = $(":radio[name='eventAppPackage']:checked"),
     streamingVal = 0,
     eventEngVal = 0;
 
-function handleGradient(e) {
-    return "linear-gradient(90deg, #1a79ff " + e / 100 + "%, rgba(18, 36, 89, 0.1) " + e / 100 + "%)";
-}
-
-function parseFloatFromString(e) {
-    return 1e3 * e.html().replace(/,/, ".").slice(1, e.html().length);
-}
-
-function getData(obj, data) {
-    return parseInt(obj.data(data));
-}
-
-function setFlex(obj) {
-    return obj.css("display", "flex")
-}
-
-function hide(obj) {
-    return obj.toggle(false);
-}
-
-function formPriceString(e) {
-    return "$" + e.toLocaleString();
-}
 $("#addPackageBtn").css("pointer-events", "none");
 
 $(":radio[name='streaming'], :radio[name='eventApp'], #numberOfCredits").on("change", function (e) {
@@ -58,8 +35,8 @@ $(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("ch
 
 
 $(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () {
-
     $("#engagementPriceTotal").html($("#engagementPrice").html());
+    
     if (getData($(":radio[name='eventApp']:checked"), "price") > 0) {
         hide($("#attendifyAppChoice"));
         setFlex($("#brandedAppChoice"));
@@ -67,7 +44,8 @@ $(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () 
         hide($("#brandedAppChoice"));
         setFlex($("#attendifyAppChoice"));
     }
-    if (getData($(":radio[name='streaming']:checked")) > 0) {
+    
+    if (getData($(":radio[name='streaming']:checked"), "price") > 0) {
         setFlex($("#customBuyStreaming"));
         hide($("#ownStreaming"));
         $("#customBuyStreaming").children(".heading-5").last().html(formPriceString(getData($(":radio[name='streaming']:checked"), "price")));
@@ -211,3 +189,28 @@ $(".numericContainer")
                 .val(value + $(this).data("increment"));
         }
     });
+
+//additional functions
+function handleGradient(e) {
+    return "linear-gradient(90deg, #1a79ff " + e / 100 + "%, rgba(18, 36, 89, 0.1) " + e / 100 + "%)";
+}
+
+function parseFloatFromString(e) {
+    return 1e3 * e.html().replace(/,/, ".").slice(1, e.html().length);
+}
+
+function getData(obj, data) {
+    return parseInt(obj.data(data));
+}
+
+function setFlex(obj) {
+    return obj.css("display", "flex")
+}
+
+function hide(obj) {
+    return obj.toggle(false);
+}
+
+function formPriceString(e) {
+    return "$" + e.toLocaleString();
+}
