@@ -20,7 +20,7 @@ $(":radio[name='eventAppPackage']").on("change", function () {
         ($("#addPackageBtn").removeClass("disabled"), setFlex($("#brandedEventsHeading")), $("#dataPrice").html(formPriceString(getData($(this), "price")))) :
         ($("#addPackageBtn").addClass("disabled"), hide($("#brandedEventsHeading")), $("#dataPrice").html("$0"));
     let e = 1999 * (getValue($(".rangeSlider")) - 1) + getData($eventAppPackageRadios);
-    $("#custom").data("price", e), $("#customExpPackagePrice, #totalPackagePrice").html(formPriceString(e));
+    $("#custom").data("price", e), $(".customexppackageprice, #totalPackagePrice").html(formPriceString(e));
 });
 
 $(":radio[name='streamingPackage']").on("change", function (e) {
@@ -75,6 +75,7 @@ $("#addPackageBtn").on("click", function (e) {
     $("#custom").siblings("div").addClass
     ("w--redirected-checked");
     setFlex($(".customexpcontainer"));
+    $total.html(formPriceString(4000 + price + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price")));
 });
 
 
@@ -144,7 +145,7 @@ $(".rangeSlider")
         if (parseInt($(this).val()) < 2 && getData($eventAppPackageRadios, "price")) {
             $(this).siblings("input").val(1);
             let e = getData($eventAppPackageRadios, "price").toLocaleString();
-            return $("#custom").data("price", e), void $("#customExpPackagePrice, #totalPackagePrice, #customPackagePrice").html(formPriceString(e));
+            return $("#custom").data("price", e), void $(".customexppackageprice, #totalPackagePrice, #customPackagePrice").html(formPriceString(e));
         }
         $(this).siblings("input").val($(this).val()),
             $(this)
@@ -156,7 +157,7 @@ $(".rangeSlider")
                 return $("#addPackageBtn").addClass("disabled"), $("#addPackageBtn").css("pointer-events", "none"), void $("#totalPackagePrice").html("$0");
         } else getValue($(this)) > 1 && ($("#addPackageBtn").removeClass("disabled"), setFlex($("#additionalEvents")), $("#addPackageBtn").css("pointer-events", ""), $("#additionalEventsValue").html(a / 1999), $("#additionalEventsPrice").html(formPriceString(a)));
         let t = a + getData($eventAppPackageRadios, "price");
-        $("#custom").data("price", t), $("#customExpPackagePrice, #customPackagePrice, #totalPackagePrice").html(formPriceString(t));
+        $("#custom").data("price", t), $(".customexppackageprice, #customPackagePrice, #totalPackagePrice").html(formPriceString(t));
     });
 $(".rangeSlider")
     .siblings(".sliderValue")
