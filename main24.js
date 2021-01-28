@@ -191,7 +191,7 @@ $(".numericContainer")
     });
 $("#numberOfCredits").on("change", function () {
     let value = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
-    return $("#engagementPriceTotal").html(formPriceString(parseInt($(this).val()) * value));
+    $("#engagementPriceTotal").html(formPriceString(parseInt($(this).val()) * value));
 });
 
 //additional functions
