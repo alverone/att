@@ -169,8 +169,8 @@ $(".rangeSlider")
 $(".credits").on("click", function () {
     hide($(this));
     $(".number-of-credits-container").toggle(true);
-    let currentValue = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
-    $("#engagementPriceTotal").html(formPriceString(2 * currentValue));
+    let value = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
+    $("#engagementPriceTotal").html(formPriceString(2 * value));
 });
 
 $(".numericContainer")
@@ -186,9 +186,13 @@ $(".numericContainer")
         } else {
             $(this)
                 .siblings("input")
-                .val(value + $(this).data("increment"));
+                .val(value + btnAction;
         }
     });
+$("#numberOfCredits").on("change", function() {
+    let value = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
+    return $("#engagementPriceTotal").html(formPriceString(parseInt($(this).val()) * value));
+});
 
 //additional functions
 function handleGradient(e) {
