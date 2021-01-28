@@ -169,6 +169,12 @@ $(".rangeSlider")
     $(".customize-modal").on("keydown", ":input:not(textarea):not(:submit)", function (e) {
         if (13 == e.keyCode) return e.preventDefault(), !1;
     });
+
+$(".credits").on("click", function () {
+    let currentValue = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
+    $("#engagementPriceTotal").html(formPriceString(parseFloat($(this).val() * currentValue)));
+});
+
 $(".numericContainer")
     .children("button")
     .on("click", function (e) {
