@@ -39,7 +39,7 @@ $(":radio[name='eventAppPackage']").on("change", function () {
 $(":radio[name='streamingPackage']").on("change", function (e) {
     "youtube, video or zoom" == $(this).val() ?
         ($(".streamingcontainer").toggle(!1), $("#streamingPrice").html("$0")) :
-        ($(".streamingcontainer").css("display", "flex"), $(".streamingname").html($(":radio[name='streamingPackage']:checked").val()), $(".streamingprice").html(formPriceString(getData($(this), "price")))), (streamingVal = $(this).data("price")));
+        ($(".streamingcontainer").css("display", "flex"), $(".streamingname").html($(":radio[name='streamingPackage']:checked").val()), $(".streamingprice").html(formPriceString(getData($(this), "price")))), (streamingVal = $(this).data("price"));
 });
 
 $(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("change", function () {
@@ -92,7 +92,7 @@ $("#rangeSlider").on("input", function (e) {
             $("#additionalRegPrice").html(formPriceString(i)),
             $("#additionalCreditsAmount").html(r - 500),
             (sliderVal = i),
-            $total.html(formPriceString(4e3 + i + getData($eventAppPackageRadios, "price") + getData($streamingPackageRadios, "price")));
+            $total.html(formPriceString(4e3 + i + getData($eventAppPackageRadios, "price") + getData($streamingPackageRadios, "price"))));
 });
 
 $("#rangeSlider")
