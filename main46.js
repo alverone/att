@@ -83,6 +83,12 @@ $("#rangeSlider").on("input", function (e) {
         t = "linear-gradient(90deg, #1a79ff " + a + "%, rgba(18, 36, 89, 0.1) " + a + "%)";
     $(this).siblings(".sliderValue").val($(this).val()), $(this).css("background", t);
 
+    if (getValue($(this)) === 10000) {
+        setFlex($(".hover-container.slider"));
+    } else {
+        hide($(".hover-container.slider"));
+    }
+
     let price = getSliderPrice($("#rangeSlider"));
     $(".additionalregprice").html(formPriceString(price));
     $(".additionalcreditsamount").html(parseInt($(this).val()) - 500);
@@ -107,6 +113,11 @@ $("#rangeSlider")
             pricePerAttendee = 6;
         } else if (value >= 5000) {
             pricePerAttendee = 5
+        }
+        if (value === 10000) {
+            setFlex($(".hover-container.slider"));
+        } else {
+            hide($(".hover-container.slider"));
         }
         if (value > 500) {
             setFlex($(".additionalregcreditscontainer"));
