@@ -183,7 +183,7 @@ $(".numericContainer")
     .on("click", function (e) {
         e.preventDefault();
         let price = parseFloat($("#engagementPrice").html().replace("$", "").replace(",", ""));
-        let value = value($(this).siblings("input"));
+        let value = getValue($(this).siblings("input"));
         let btnAction = getData($(this), "increment");
         if ((value === 1) && (btnAction === -1)) {
             $(this).siblings("input").val(1);
