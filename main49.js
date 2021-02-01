@@ -16,7 +16,7 @@ $(":radio[name='streaming'], :radio[name='eventApp'], #numberOfCredits").on("cha
 });
 
 $(":radio[name='eventAppPackage']").on("change", function () {
-    parseInt($(this).data("price")) > 0 ?
+    (parseInt($(this).data("price")) > 0) || (getValue($(".rangeSlider")) > 1) ?
         ($("#addPackageBtn").removeClass("disabled"), setFlex($("#brandedEventsHeading")), $("#dataPrice").html(formPriceString(getData($(this), "price")))) :
         ($("#addPackageBtn").addClass("disabled"), hide($("#brandedEventsHeading")), $("#dataPrice").html("$0"));
     let e = 1999 * (getValue($(".rangeSlider")) - 1) + getData($(":radio[name='eventAppPackage']:checked"), "price");
@@ -31,7 +31,7 @@ $(":radio[name='streamingPackage']").on("change", function (e) {
 
 $(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("change", function () {
     let defaultPrice = 4000;
-    $total.html(formPriceString(defaultPrice + getSliderPrice($("#rangeSlider")) + getData($(":radio[name='streamingPackage']:checked"), "price") + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getSliderPrice($("#rangeSlider")));
+    $total.html(formPriceString(defaultPrice + getSliderPrice($("#rangeSlider")) + getData($(":radio[name='streamingPackage']:checked"), "price") + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getSliderPrice($("#rangeSlider"))));
     if ($("#custom").is(":checked")) {
         hide($(".brandedappcontainer"));   
     }
@@ -96,7 +96,7 @@ $("#rangeSlider").on("input", function (e) {
     $(".additionalregprice").html(formPriceString(price));
     $(".additionalcreditsamount").html(parseInt($(this).val()) - 500);
     sliderVal = price;
-    $total.html(formPriceString(4000 + price + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price"))));
+    $total.html(formPriceString(4000 + price + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price")));
 });
 
 $("#rangeSlider")
