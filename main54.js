@@ -8,8 +8,6 @@ let $eventAppPackageRadios = $(":radio[name='eventAppPackage']:checked"),
     streamingVal = 0,
     eventEngVal = 0;
 
-$("#addPackageBtn").css("pointer-events", "none");
-
 $(":radio[name='streaming'], :radio[name='eventApp'], #numberOfCredits").on("change", function (e) {
     let a = getData($(":radio[name='streaming']:checked"), "price") + 1999 + getData($(":radio[name='eventApp']:checked"), "price");
     $("#engagementPrice").html(formPriceString(a)), $("#engagementPriceTotal").html(formPriceString(a * getValue($("#numberOfCredits"))));
