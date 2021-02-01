@@ -31,7 +31,7 @@ $(":radio[name='streamingPackage']").on("change", function (e) {
 
 $(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("change", function () {
     let defaultPrice = 4000;
-    $total.html(formPriceString(defaultPrice + getSliderPrice($("#rangeSlider")) + getData($(":radio[name='streamingPackage']:checked"), "price") + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getSliderPrice($("#rangeSlider"))));
+    $total.html(formPriceString(defaultPrice + getSliderPrice($("#rangeSlider")) + getData($(":radio[name='streamingPackage']:checked"), "price") + getData($(":radio[name='eventAppPackageTotal']:checked"), "price"))));
 });
 
 $(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () {
