@@ -165,8 +165,8 @@ $(".rangeSlider")
         let a = 1999 * (getValue($(this)) - 1);
         if (a <= 0) {
             if ((hide($("#additionalEvents")), 0 == getData($eventAppPackageRadios, "price")))
-                return $("#addPackageBtn").addClass("disabled"), $("#addPackageBtn").css("pointer-events", "none"), void $("#totalPackagePrice").html("$0");
-        } else getValue($(this)) > 1 && ($("#addPackageBtn").removeClass("disabled"), setFlex($("#additionalEvents")), $("#addPackageBtn").css("pointer-events", ""), $("#additionalEventsValue").html(a / 1999), $("#additionalEventsPrice").html(formPriceString(a)));
+                return $("#addPackageBtn").addClass("disabled"), void $("#totalPackagePrice").html("$0");
+        } else getValue($(this)) > 1 && ($("#addPackageBtn").removeClass("disabled"), setFlex($("#additionalEvents")), $("#additionalEventsValue").html(a / 1999), $("#additionalEventsPrice").html(formPriceString(a)));
         let t = a + getData($(":radio[name='eventAppPackage']:checked"), "price");
         $("#custom").data("price", t), $(".customexppackageprice, #customPackagePrice, #totalPackagePrice").html(formPriceString(t));
     });
