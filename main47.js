@@ -32,6 +32,9 @@ $(":radio[name='streamingPackage']").on("change", function (e) {
 $(":radio[name='eventAppPackageTotal'], :radio[name='streamingPackage']").on("change", function () {
     let defaultPrice = 4000;
     $total.html(formPriceString(defaultPrice + getSliderPrice($("#rangeSlider")) + getData($(":radio[name='streamingPackage']:checked"), "price") + getData($(":radio[name='eventAppPackageTotal']:checked"), "price")));
+    if ($("#custom").is(":checked")) {
+        hide($(".brandedappcontainer"));   
+    }
 });
 
 $(":radio[name='eventApp'], :radio[name='streaming']").on("change", function () {
@@ -74,7 +77,7 @@ $("#addPackageBtn").on("click", function (e) {
     $("#custom").prop("checked", true);
     $("#custom").siblings("div").addClass("w--redirected-checked");
     setFlex($(".customexpcontainer"));
-    $total.html(formPriceString(4000 + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price")));
+    $total.html(formPriceString(4000 + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price") + getSliderPrice($("#rangeSlider"))));
 });
 
 
@@ -93,7 +96,7 @@ $("#rangeSlider").on("input", function (e) {
     $(".additionalregprice").html(formPriceString(price));
     $(".additionalcreditsamount").html(parseInt($(this).val()) - 500);
     sliderVal = price;
-    $total.html(formPriceString(4000 + price + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price")));
+    $total.html(formPriceString(4000 + price + getData($(":radio[name='eventAppPackageTotal']:checked"), "price") + getData($(":radio[name='streamingPackage']:checked"), "price") + getSliderPrice($("#rangeSlider"))));
 });
 
 $("#rangeSlider")
